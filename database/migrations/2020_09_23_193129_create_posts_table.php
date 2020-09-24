@@ -15,7 +15,7 @@ class CreatePostsTable extends Migration
   {
     Schema::create('posts', function (Blueprint $table) {
       $table->id();
-      $table->unsignedBigInteger('author_id');
+      $table->unsignedBigInteger('user_id');
       $table->string('title');
       $table->string('slug')->unique();
       $table->text('excerpt');
@@ -23,7 +23,7 @@ class CreatePostsTable extends Migration
       $table->string('image')->nullable();
       $table->timestamps();
 
-      $table->foreign('author_id')
+      $table->foreign('user_id')
         ->references('id')
         ->on('users')
         ->onDelete('restrict'); // When user has one or more posts it can not be deleted.

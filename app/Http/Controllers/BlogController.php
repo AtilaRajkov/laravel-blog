@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+  protected $posts_per_page = 3; // $limit
+
   /**
    * Display a listing of the resource.
    *
@@ -14,7 +16,9 @@ class BlogController extends Controller
    */
   public function index()
   {
-    $posts = Post::all();
+    $posts = Post::with('author')
+      ->latestFirst()
+      ->simplePaginate($this->posts_per_page);
     return view('blog.index', compact('posts'));
   }
 

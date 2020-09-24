@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
 
+  public function author()
+  {
+    return $this->belongsTo(User::class, 'user_id','id');
+  }
+
+
   public function getImageUrlAttribute()
   {
     $imageUrl = '';
@@ -21,9 +27,15 @@ class Post extends Model
     return $imageUrl;
   }
 
-  public function getCreatedDateAttribute()
+  public function getDateAttribute()
   {
     return $this->created_at->diffForHumans();
+  }
+
+
+  public function scopeLatestFirst($query)
+  {
+    return $query->orderBy('created_at', 'desc');
   }
 
 }

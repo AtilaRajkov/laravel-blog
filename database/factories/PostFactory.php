@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 $factory->define(Post::class, function (Faker $faker) {
 
-  $image = "Post_Image_" . rand(1, 5);
+  $image = "Post_Image_" . rand(1, 5) . '.jpg';
 
   return [
     'user_id' => User::all()->random()->id,

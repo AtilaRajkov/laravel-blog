@@ -16,6 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'BlogController@index')
   ->name('blog.index');
 
-Route::get('/blog/show/{slug}', 'BlogController@show')
+Route::get('/blog/show/{post}', 'BlogController@show')
   ->name('blog.show');
 

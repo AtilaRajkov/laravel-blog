@@ -25,7 +25,7 @@
                   {{$post->title}}
                 </a>
               </h2>
-              <p>{{$post->excerpt}}</p>
+              {!! $post->excerpt_html !!}
             </div>
 
             <div class="post-meta padding-10 clearfix">

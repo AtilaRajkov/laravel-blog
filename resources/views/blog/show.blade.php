@@ -9,10 +9,9 @@
         <article class="post-item post-detail">
           @if($post->image_url)
             <div class="post-item-image">
-{{--              <a href="#">--}}
-                <img src="{{ $post->image_url }}"
-                     alt="{{ $post->title }}">
-{{--              </a>--}}
+              <img src="{{ $post->image_url }}"
+                   alt="{{ $post->title }}"
+              >
             </div>
           @endif
 
@@ -32,7 +31,7 @@
                   <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
                 </ul>
               </div>
-              {!! $post->body !!}
+              {!! $post->body_html !!}
             </div>
           </div>
         </article>

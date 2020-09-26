@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Category;
 use App\Post;
 use App\User;
 use Carbon\Carbon;
@@ -20,6 +21,7 @@ $factory->define(Post::class, function (Faker $faker) {
     'body' => $body = $faker->paragraphs(rand(10, 15), true),
     'excerpt' => Str::limit($body, 250),
     'image' => (rand(0, 1) == 1) ? $image : NULL,
-    'published_at' => (rand(0, 10) < 3) ? NULL : $date->addDays(rand(1, 20))
+    'published_at' => (rand(0, 10) < 3) ? NULL : $date->addDays(rand(1, 20)),
+    'category_id' => Category::all()->random()->id,
   ];
 });

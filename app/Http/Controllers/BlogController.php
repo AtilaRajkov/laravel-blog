@@ -17,28 +17,27 @@ class BlogController extends Controller
    */
   public function index()
   {
-    $categories = Category::with('posts')
-      ->orderBy('title', 'asc')
-      ->get();
-
     $posts = Post::with('author')
+      ->with('category')
       ->published()
       ->latestFirst()
       ->paginate($this->posts_per_page);
-    return view('blog.index', compact('posts', 'categories'));
+
+    return view('blog.index', compact('posts'));
   }
 
 
   public function category(Category $category)
   {
+    $categoryName = $category->title;
+
     $posts = $category->posts()
+      ->with('author')
+      ->with('category')
       ->published()
       ->paginate($this->posts_per_page);
 
-    $categories = $categories = Category::with('posts')
-      ->orderBy('title', 'asc')
-      ->get();
-    return view('blog.index', compact('posts', 'categories'));
+    return view('blog.index', compact('posts', 'categoryName'));
   }
 
   /**

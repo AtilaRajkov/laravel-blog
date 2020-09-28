@@ -29,4 +29,9 @@ class Category extends Model
     return $this->posts()->published()->count();
   }
 
+  public function getRouteKeyName()
+  {
+    return 'slug';
+  }
+
 }

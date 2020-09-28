@@ -7,6 +7,13 @@
     <div class="col-md-8">
 
 
+      @if (isset($categoryName))
+        <div class="alert alert-info">
+          <p><strong>{{$categoryName}}</strong></p>
+        </div>
+      @endif
+
+
     @forelse($posts as $post)
         <article class="post-item">
 
@@ -38,7 +45,7 @@
                     <time> {{ $post->date }}</time>
                   </li>
                   <li><i class="fa fa-tags"></i>
-                    <a href="#">
+                    <a href="{{route('category', $post->category->slug)}}">
                         {{ $post->category->title }}
                     </a>
                   </li>
@@ -52,7 +59,9 @@
           </div>
         </article>
       @empty
-        <h3>There no posts currently</h3>
+        <div class="alert alert-warning">
+          <p>Nothing Found</p>
+        </div>
       @endforelse
 
 

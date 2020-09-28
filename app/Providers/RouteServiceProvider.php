@@ -40,11 +40,11 @@ class RouteServiceProvider extends ServiceProvider
               ->where('slug', $slug)->first() ?? abort(404);
         });
 
-        Route::bind('category', function($slug) {
-          return Category::where('slug', $slug)
-              ->with('posts')
-              ->first() ?? abort(404);
-        });
+//        Route::bind('category', function($slug) {
+//          return Category::where('slug', $slug)
+//              ->with('posts')
+//              ->first() ?? abort(404);
+//        });
     }
 
     /**

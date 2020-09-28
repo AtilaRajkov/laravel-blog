@@ -11,7 +11,10 @@ use Illuminate\Support\Str;
 
 $factory->define(Post::class, function (Faker $faker) {
 
-  $image = "Post_Image_" . rand(1, 5) . '.jpg';
+  $category = Category::inRandomOrder()->first();
+
+  $image = $category->slug .  '.jpg';
+
   $date = Carbon::create(2020, 9, 14, 9);
 
   return [
@@ -22,6 +25,6 @@ $factory->define(Post::class, function (Faker $faker) {
     'excerpt' => Str::limit($body, 250),
     'image' => (rand(0, 1) == 1) ? $image : NULL,
     'published_at' => (rand(0, 10) < 3) ? NULL : $date->addDays(rand(1, 20)),
-    'category_id' => Category::all()->random()->id,
+    'category_id' => $category->id,
   ];
 });

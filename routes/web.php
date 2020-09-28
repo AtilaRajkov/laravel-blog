@@ -19,3 +19,7 @@ Route::get('/', 'BlogController@index')
 Route::get('/blog/show/{post}', 'BlogController@show')
   ->name('blog.show');
 
+//Route::resource('categories.posts', 'CategoryPostController');
+
+Route::get('/category/{category}', 'BlogController@category')
+  ->name('category');

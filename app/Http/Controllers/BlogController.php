@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Post;
 use Illuminate\Http\Request;
 
@@ -16,11 +17,28 @@ class BlogController extends Controller
    */
   public function index()
   {
+    $categories = Category::with('posts')
+      ->orderBy('title', 'asc')
+      ->get();
+
     $posts = Post::with('author')
       ->published()
       ->latestFirst()
       ->paginate($this->posts_per_page);
-    return view('blog.index', compact('posts'));
+    return view('blog.index', compact('posts', 'categories'));
+  }
+
+
+  public function category(Category $category)
+  {
+    $posts = $category->posts()
+      ->published()
+      ->paginate($this->posts_per_page);
+
+    $categories = $categories = Category::with('posts')
+      ->orderBy('title', 'asc')
+      ->get();
+    return view('blog.index', compact('posts', 'categories'));
   }
 
   /**

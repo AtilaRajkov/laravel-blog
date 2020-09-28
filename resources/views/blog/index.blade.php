@@ -7,7 +7,7 @@
     <div class="col-md-8">
 
 
-    @foreach($posts as $post)
+    @forelse($posts as $post)
         <article class="post-item">
 
         @if($post->image_url)
@@ -35,9 +35,13 @@
                     <a href="#"> {{$post->author->name}}</a>
                   </li>
                   <li><i class="fa fa-clock-o"></i>
-                    <time> {{$post->date}}</time>
+                    <time> {{ $post->date }}</time>
                   </li>
-                  <li><i class="fa fa-tags"></i><a href="#"> Blog</a></li>
+                  <li><i class="fa fa-tags"></i>
+                    <a href="#">
+                        {{ $post->category->title }}
+                    </a>
+                  </li>
                   <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
                 </ul>
               </div>
@@ -47,7 +51,9 @@
             </div>
           </div>
         </article>
-      @endforeach
+      @empty
+        <h3>There no posts currently</h3>
+      @endforelse
 
 
 

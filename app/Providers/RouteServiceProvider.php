@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Category;
 use App\Post;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,12 @@ class RouteServiceProvider extends ServiceProvider
           return Post::published()
               ->with('author')
               ->where('slug', $slug)->first() ?? abort(404);
+        });
+
+        Route::bind('category', function($slug) {
+          return Category::where('slug', $slug)
+              ->with('posts')
+              ->first() ?? abort(404);
         });
     }
 

@@ -18,7 +18,7 @@ $factory->define(Post::class, function (Faker $faker) {
   $date = Carbon::create(2020, 9, 14, 9);
 
   return [
-    'user_id' => User::all()->random()->id,
+    'author_id' => User::all()->random()->id,
     'title' => $title = $faker->sentence(rand(8, 12)),
     'slug' => Str::slug($title, '-'),
     'body' => $body = $faker->paragraphs(rand(10, 15), true),

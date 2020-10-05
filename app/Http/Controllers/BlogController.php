@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Post;
+use App\User;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -38,6 +39,21 @@ class BlogController extends Controller
       ->paginate($this->posts_per_page);
 
     return view('blog.index', compact('posts', 'categoryName'));
+  }
+
+
+  public function author(User $author)
+  {
+    $authorName = $author->name;
+
+    $posts = $author->posts()
+      ->with('author')
+      ->with('category')
+      ->published()
+      ->paginate($this->posts_per_page);
+
+    return view('blog.index', compact('posts', 'authorName'));
+
   }
 
   /**

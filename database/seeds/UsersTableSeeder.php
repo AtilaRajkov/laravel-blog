@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Faker\Factory;
 
 class UsersTableSeeder extends Seeder
 {
@@ -18,6 +19,8 @@ class UsersTableSeeder extends Seeder
     // resets the users table
     DB::statement('SET FOREIGN_KEY_CHECKS=0');
     DB::table('users')->truncate();
+
+    $faker = Factory::create();
 
 //    DB::table('users')->insert([
 //      [
@@ -38,7 +41,8 @@ class UsersTableSeeder extends Seeder
       'email_verified_at' => now(),
       'remember_token' => Str::random(10),
       'created_at' => now(),
-      'updated_at' => now()
+      'updated_at' => now(),
+      'bio' => $faker->text(rand(250, 300))
     ]);
 
     factory(User::class, 2)->create();

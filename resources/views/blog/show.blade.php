@@ -27,7 +27,7 @@
                   <li><i class="fa fa-clock-o"></i>
                     <time> {{ $post->date }}</time>
                   </li>
-                  <li><i class="fa fa-tags"></i>
+                  <li><i class="fa fa-folder"></i>
                     <a href="{{route('category', $post->category->slug)}}">
                       {{ $post->category->title }}
                     </a>
@@ -44,7 +44,10 @@
           <div class="media">
             <div class="media-left">
               <a href="{{route('author', $post->author->slug)}}">
-                <img alt="Author 1" src="/img/author.jpg" class="media-object">
+                <img alt="{{ $post->author->name }}"
+                     src="{{ $post->author->gravatar() }}"
+                     class="media-object"
+                     width="100">
               </a>
             </div>
             <div class="media-body">
@@ -57,12 +60,14 @@
                 <a href="{{route('author', $post->author->slug)}}">
                   <i class="fa fa-clone"></i>
                   @php
-                    $postCount = $post->author->posts->count();
+                    $postCount = $post->author->posts()->published()->count();
                   @endphp
                   {{ $postCount }} {{ Str::plural('post', $postCount) }}
                 </a>
               </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad aut sunt cum, mollitia excepturi neque sint magnam minus aliquam, voluptatem, labore quis praesentium eum quae dolorum temporibus consequuntur! Non.</p>
+              <p>
+                {!! $post->author->bio_html !!}
+              </p>
             </div>
           </div>
         </article>

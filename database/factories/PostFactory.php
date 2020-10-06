@@ -26,5 +26,6 @@ $factory->define(Post::class, function (Faker $faker) {
     'image' => (rand(0, 1) == 1) ? $image : NULL,
     'published_at' => (rand(0, 10) < 3) ? NULL : $date->addDays(rand(1, 20)),
     'category_id' => $category->id,
+    'view_count' => rand(1, 10) * 10,
   ];
 });
